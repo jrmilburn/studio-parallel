@@ -3,6 +3,9 @@
 import { motion, useAnimation } from "framer-motion"
 import { useCallback } from "react"
 
+import SocialProof from "@/components/call-to-action"
+import Services from "@/components/services"
+
 export default function Home() {
   const dockControls = useAnimation()
   const navControls = useAnimation()
@@ -26,6 +29,7 @@ export default function Home() {
   }
 
   return (
+    <>
     <div className="w-full min-h-screen bg-black">
       {/* Centered title that docks to the top and scales down */}
       <motion.div
@@ -110,5 +114,8 @@ export default function Home() {
         </div>
       </nav>
     </div>
+    <SocialProof />
+    <Services />
+    </>
   )
 }
