@@ -7,7 +7,7 @@ import {
   useScroll,
 } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 /* ----------------------------- data ----------------------------- */
 
@@ -98,7 +98,7 @@ function Bullets({ items }: { items: string[] }) {
 function ReviewCard({ r }: { r: Review }) {
   return (
     <blockquote
-      className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7 backdrop-blur shadow-2xl will-change-transform"
+      className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7 backdrop-blur shadow-2xl will-change-transform h-full"
       aria-label="Client review"
     >
       <p className="text-zinc-100 leading-relaxed">“{r.quote}”</p>
@@ -123,61 +123,98 @@ function ReviewCard({ r }: { r: Review }) {
 
 export function StickyServiceOneShot({
   s,
-  trigger = 0.5, // progress threshold (0=start of section, 1=end)
-  enter = { x: 0, opacity: 1, clipPath: "inset(0% 0% 0% 0%)" },
-  exit = { x: 64, opacity: 0, clipPath: "inset(0% 0% 0% 100%)" },
+  trigger = 0.5,
 }: {
   s: Section;
   trigger?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  enter?: Record<string, any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  exit?: Record<string, any>;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reviewControls = useAnimation();
-  const revealedRef = useRef(false); // prevents re-trigger after first reveal
+
+  // independent motion
+  const leftControls = useAnimation();
+  const rightControls = useAnimation();
+  const revealedRef = useRef(false);
+
+  // same-height sync (measure left)
+  const leftRef = useRef<HTMLDivElement>(null);
+  const [stackHeight, setStackHeight] = useState<number>();
+
+  useEffect(() => {
+    const el = leftRef.current;
+    if (!el) return;
+    const setH = () => setStackHeight(el.offsetHeight);
+    setH();
+    const ro = new ResizeObserver(setH);
+    ro.observe(el);
+    window.addEventListener("resize", setH);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", setH);
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
 
-  // Respect prefers-reduced-motion: immediately show review, skip animations
+  // reduced motion
   useEffect(() => {
     const mql =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mql && mql.matches) {
       revealedRef.current = true;
-      reviewControls.set(enter);
+      leftControls.set({ x: 0 });
+      rightControls.set({ x: 0, opacity: 1, clipPath: "inset(0% 0% 0% 0%)" });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [leftControls, rightControls]);
 
-  // If user lands part-way through the section (already past trigger), start revealed
+  // initial states / landing past trigger
   useEffect(() => {
     const current = scrollYProgress.get();
-    if (!revealedRef.current && current >= trigger) {
+    if (revealedRef.current || current >= trigger) {
       revealedRef.current = true;
-      reviewControls.set(enter);
-    } else if (!revealedRef.current) {
-      reviewControls.set(exit);
+      leftControls.set({ x: "-20%" });   // slightly less than before for a cleaner settle
+      rightControls.set({
+        x: "75%",                          // gives breathing room between cards
+        opacity: 1,
+        clipPath: "inset(0% 0% 0% 0%)",
+      });
+    } else {
+      leftControls.set({ x: 0 });
+      rightControls.set({
+        x: 0,
+        opacity: 0,
+        clipPath: "inset(0% 100% 0% 0%)",
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // One-shot trigger: reveal once on crossing threshold; never hide again
+  // one-shot trigger
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     if (revealedRef.current) return;
     if (v >= trigger) {
       revealedRef.current = true;
-      reviewControls.start({
-        ...enter,
+
+      leftControls.start({
+        x: "-20%",
         transition: { duration: 0.5, ease: [0.22, 0.12, 0.18, 1] },
+      });
+
+      rightControls.start({
+        x: "75%",
+        opacity: 1,
+        clipPath: "inset(0% 0% 0% 0%)",
+        transition: { duration: 0.55, ease: [0.22, 0.12, 0.18, 1] },
       });
     }
   });
+
+  // shared “card chrome”
+  const cardBase =
+    "rounded-2xl ring-1 ring-white/10 bg-white/[0.055] backdrop-blur-md shadow-2xl";
 
   return (
     <section
@@ -188,43 +225,51 @@ export function StickyServiceOneShot({
       aria-label={s.title}
     >
       <div className="sticky top-0 h-screen">
-        <div className="mx-auto h-full w-full max-w-6xl px-6 md:px-8">
-          <div className="grid h-full items-center gap-10 md:grid-cols-12">
-            {/* Left: narrative */}
-            <div className="md:col-span-5 will-change-transform">
-              <h2 className="text-4xl md:text-5xl font-semibold text-white">
-                {s.title}
-              </h2>
-              <p className="mt-4 text-zinc-300 text-lg leading-relaxed">
-                {s.tagline}
-              </p>
-              <div className="mt-6 md:mt-8">
-                <Bullets items={s.bullets} />
-              </div>
-            </div>
-
-            {/* Right: review panel (reveals once, cannot be re-triggered) */}
-            <div className="md:col-span-7 relative">
-              <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-4 md:p-6 overflow-hidden shadow-2xl">
-                {/* edge fades for polish */}
-                <div className="pointer-events-none absolute inset-y-4 left-4 w-10 bg-gradient-to-r from-black/30 to-transparent rounded-l-xl" />
-                <div className="pointer-events-none absolute inset-y-4 right-4 w-10 bg-gradient-to-l from-black/30 to-transparent rounded-r-xl" />
-
-                <motion.div initial={exit} animate={reviewControls}>
-                  <ReviewCard r={s.review} />
-                </motion.div>
-              </div>
-
-              {/* Slim progress bar (cosmetic) */}
-              <div className="mt-4 h-1 w-full bg-white/10 rounded" aria-hidden>
-                <motion.div
-                  className="h-1 bg-white/70 rounded"
+        <div className="mx-auto h-full w-full max-w-5xl px-6 md:px-8">
+          {/* Center the stack */}
+          <div className="h-full flex items-center justify-center">
+            <div
+              className="relative w-full max-w-2xl"
+              style={stackHeight ? { height: `${stackHeight}px` } : undefined}
+            >
+              {/* REVIEW (behind) */}
+              <motion.div
+                className="absolute inset-0 -z-10 w-md"
+                animate={rightControls}
+                style={{
+                  height: "100%",
+                }}
+              >
+                <div
+                  className={`${cardBase} h-full p-5 md:p-6 overflow-hidden`}
+                  // Subtle inner fade on the left edge so the overlap looks tidy
                   style={{
-                    scaleX: scrollYProgress,
-                    transformOrigin: "0% 50%",
+                    WebkitMaskImage:
+                      "linear-gradient(to right, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.35) 6%, rgba(0,0,0,1) 14%)",
+                    maskImage:
+                      "linear-gradient(to right, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.35) 6%, rgba(0,0,0,1) 14%)",
                   }}
-                />
-              </div>
+                >
+                  <ReviewCard r={s.review} />
+                </div>
+              </motion.div>
+
+              {/* SERVICE (front) */}
+              <motion.div
+                ref={leftRef}
+                className={`${cardBase} w-md relative z-10 p-6 md:p-8`}
+                animate={leftControls}
+              >
+                <h2 className="text-4xl md:text-5xl font-semibold text-white tracking-tight">
+                  {s.title}
+                </h2>
+                <p className="mt-4 text-zinc-300/95 text-lg leading-relaxed">
+                  {s.tagline}
+                </p>
+                <div className="mt-6 md:mt-8">
+                  <Bullets items={s.bullets} />
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -232,6 +277,10 @@ export function StickyServiceOneShot({
     </section>
   );
 }
+
+
+
+
 
 /* ---------------------------- page block ---------------------------- */
 
