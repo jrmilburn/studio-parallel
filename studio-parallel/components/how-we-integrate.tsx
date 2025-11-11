@@ -1,4 +1,5 @@
 import ServiceLine from "./service-line"
+import RevealOnScroll from "./reveal-on-scroll"
 
 export default function HowWeIntegrate() {
 

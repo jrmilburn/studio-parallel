@@ -1,20 +1,40 @@
-export default function AnimationBlock({ pos }: { pos: string }) {
+"use client";
+
+import { useInViewOnce } from "./useInView";
+import clsx from "clsx";
+
+export default function AnimationBlock({
+  pos,
+  className = "",
+  triggerOnScroll = false,
+}: {
+  pos: string;
+  className?: string;
+  triggerOnScroll?: boolean;
+}) {
+  const { ref, inView } = useInViewOnce({ threshold: 0.95 });
+
   return (
     <div
-      style={{
-        // cap is the smaller of 20% vw or 20% vh
-        "--cap": "min(20vw, 20vh)",
-        // block keeps a 17:20 aspect ratio
-        height: "var(--cap)",
-        aspectRatio: "17 / 20",
-        // compute the actual width from the cap + ratio
-        "--w": "calc(var(--cap) * 17 / 20)",
-        // place the block two widths from the right edge
-        right: "calc(var(--w) * 2)",
-        // set top as you like (example keeps your 20vh)
-        top: "20vh",
-      } as React.CSSProperties}
-      className={`absolute rounded bg-[#A64DFF] block${pos}`}
+      ref={triggerOnScroll ? ref : null}
+      className={clsx(
+        "absolute rounded bg-[#A64DFF]",
+        className,
+        triggerOnScroll ? 
+        triggerOnScroll && inView && `block${pos}`
+        :
+        `block${pos}`
+      )}
+      style={
+        {
+          "--cap": "min(20vw, 20vh)",
+          height: "var(--cap)",
+          aspectRatio: "17 / 20",
+          "--w": "calc(var(--cap) * 17 / 20)",
+          right: "calc(var(--w) * 2)",
+          top: "20vh",
+        } as React.CSSProperties
+      }
     />
   );
 }

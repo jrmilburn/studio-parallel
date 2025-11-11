@@ -185,13 +185,79 @@ body {
   75%,100% { transform: translate3d(var(--cell), calc(-1 * var(--cell)), 0); }
 }
 
+@keyframes block7 {
+
+}
+
+@keyframes block8 {
+  0%,37.5% { transform: translate3d(0,0,0); }
+
+  /* Move 1 — right to 100 (37.5→50) */
+  37.5%   { animation-timing-function: var(--ease-in); }
+  40.0%   { transform: translate3d(calc(-1 * var(--anticipation) * var(--cell)), 0, 0); }
+  46.875% { transform: translate3d(calc(var(--overshoot) * var(--cell)), 0, 0);
+            animation-timing-function: var(--ease-out); }
+  49.9%   { transform: translate3d(var(--cell), 0, 0); }
+  50%,62.5% { transform: translate3d(var(--cell), 0, 0); }
+
+  /* Move 2 — right to 200 (62.5→75) */
+  62.5%   { animation-timing-function: var(--ease-in); }
+  65.0%   { transform: translate3d(calc(var(--cell) - var(--anticipation) * var(--cell)), 0, 0); }
+  71.875% { transform: translate3d(calc(2 * var(--cell) * var(--overshoot)), 0, 0);
+            animation-timing-function: var(--ease-out); }
+  74.9%   { transform: translate3d(calc(2 * var(--cell)), 0, 0); }
+  75%,100% { transform: translate3d(calc(2 * var(--cell)), 0, 0); }
+}
+
+/* BLOCK 9 — (0,0) -> (0,100) -> (0,200) */
+@keyframes block9 {
+  0%,37.5% { transform: translate3d(0,0,0); }
+
+  /* Move 1 — down to 100 (37.5→50) */
+  37.5%   { animation-timing-function: var(--ease-in); }
+  40.0%   { transform: translate3d(0, calc(-1 * var(--anticipation) * var(--cell)), 0); }
+  46.875% { transform: translate3d(0, calc(var(--overshoot) * var(--cell)), 0);
+            animation-timing-function: var(--ease-out); }
+  49.9%   { transform: translate3d(0, var(--cell), 0); }
+  50%,62.5% { transform: translate3d(0, var(--cell), 0); }
+
+  /* Move 2 — down to 200 (62.5→75) */
+  62.5%   { animation-timing-function: var(--ease-in); }
+  65.0%   { transform: translate3d(0, calc(var(--cell) - var(--anticipation) * var(--cell)), 0); }
+  71.875% { transform: translate3d(0, calc(2 * var(--cell) * var(--overshoot)), 0);
+            animation-timing-function: var(--ease-out); }
+  74.9%   { transform: translate3d(0, calc(2 * var(--cell)), 0); }
+  75%,100% { transform: translate3d(0, calc(2 * var(--cell)), 0); }
+}
+
+/* BLOCK 10 — (0,0) -> (0,100) -> (100,100) */
+@keyframes block10 {
+  0%,37.5% { transform: translate3d(0,0,0); }
+
+  /* Move 1 — down to 100 (37.5→50) */
+  37.5%   { animation-timing-function: var(--ease-in); }
+  40.0%   { transform: translate3d(0, calc(-1 * var(--anticipation) * var(--cell)), 0); }
+  46.875% { transform: translate3d(0, calc(var(--overshoot) * var(--cell)), 0);
+            animation-timing-function: var(--ease-out); }
+  49.9%   { transform: translate3d(0, var(--cell), 0); }
+  50%,62.5% { transform: translate3d(0, var(--cell), 0); }
+
+  /* Move 2 — right to 100 (62.5→75) */
+  62.5%   { animation-timing-function: var(--ease-in); }
+  65.0%   { transform: translate3d(calc(-1 * var(--anticipation) * var(--cell)), var(--cell), 0); }
+  71.875% { transform: translate3d(calc(var(--overshoot) * var(--cell)), var(--cell), 0);
+            animation-timing-function: var(--ease-out); }
+  74.9%   { transform: translate3d(var(--cell), var(--cell), 0); }
+  75%,100% { transform: translate3d(var(--cell), var(--cell), 0); }
+}
+
+
 
 /* Assignments */
-.block1, .block2, .block3, .block4, .block5, .block6 {
+.block1, .block2, .block3, .block4, .block5, .block6, .block8, .block9, .block10 {
   animation-duration: 1.5s;
   animation-fill-mode: forwards;
   animation-timing-function: linear; /* per-keyframe overrides when moving */
-  animation-delay: 1s;
 }
 .block1{ animation-name:block1 }
 .block2{ animation-name:block2 }
@@ -199,4 +265,30 @@ body {
 .block4{ animation-name:block4 }
 .block5{ animation-name:block5 }
 .block6{ animation-name:block6 }
+.block7 { }
+
+.block8 { 
+  animation-name: block8;
+}
+
+.block9 { 
+  animation-name: block9;
+}
+
+.block10 { 
+  animation-name: block10
+}
+
+/* When observed in view, let it run */
+.in-view {
+  animation-play-state: running;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .block8, .block9, .block10 {
+    animation: none !important;
+    transform: none !important;
+  }
+}
 
