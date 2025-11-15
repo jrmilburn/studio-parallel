@@ -7,20 +7,18 @@ import { useInView } from "framer-motion";
 
 type RevealOnScrollProps = {
   children: React.ReactNode;
-  /** "up" means it moves up into place, "down" moves down into place */
   direction?: "up" | "down";
-  /** How far (in px) it travels before settling */
   distance?: number;
-  /** Delay (s) before the animation starts once in view */
   delay?: number;
-  /** Portion of element that must be visible to trigger (0–1) */
   amount?: number;
-  /** Only animate once (recommended) */
   once?: boolean;
-  /** Stagger children if you pass multiple inline nodes */
   staggerChildren?: boolean;
-  /** Fixed animation duration in seconds */
   duration?: number;
+  /**
+   * If provided, this manually controls whether the content
+   * is shown or hidden, instead of using the in-view state.
+   */
+  active?: boolean;
 };
 
 export default function RevealOnScroll({
@@ -32,12 +30,13 @@ export default function RevealOnScroll({
   once = true,
   staggerChildren = false,
   duration = 0.5,
+  active,
 }: RevealOnScrollProps) {
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once, amount });
 
-  const y = prefersReducedMotion ? 0 : (direction === "up" ? distance : -distance);
+  const y = prefersReducedMotion ? 0 : direction === "up" ? distance : -distance;
 
   const parent = {
     hidden: {},
@@ -58,33 +57,35 @@ export default function RevealOnScroll({
         : {
             duration,
             ease: "easeOut",
-            // When not staggering, apply delay on the child
             delay: staggerChildren ? 0 : delay,
           },
     },
   };
+
+  // If `active` is provided, it overrides inView.
+  const shouldShow = typeof active === "boolean" ? active : inView;
 
   return (
     <motion.div
       ref={ref}
       variants={parent}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      animate={shouldShow ? "show" : "hidden"}
       style={{ overflow: "hidden", willChange: "transform, opacity" }}
     >
       {staggerChildren ? (
         <div style={{ display: "inline-block" }}>
-          {Array.isArray(children)
-            ? (children as React.ReactNode[]).map((c, i) => (
-                <motion.span key={i} variants={child} style={{ display: "inline-block" }}>
-                  {c}
-                </motion.span>
-              ))
-            : (
-              <motion.span variants={child} style={{ display: "inline-block" }}>
-                {children}
+          {Array.isArray(children) ? (
+            (children as React.ReactNode[]).map((c, i) => (
+              <motion.span key={i} variants={child} style={{ display: "inline-block" }}>
+                {c}
               </motion.span>
-            )}
+            ))
+          ) : (
+            <motion.span variants={child} style={{ display: "inline-block" }}>
+              {children}
+            </motion.span>
+          )}
         </div>
       ) : (
         <motion.div variants={child} style={{ display: "inline-block" }}>

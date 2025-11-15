@@ -7,12 +7,14 @@ export default function AnimationBlock({
   pos,
   className = "",
   triggerOnScroll = false,
+  threshold=0.85
 }: {
   pos: string;
   className?: string;
   triggerOnScroll?: boolean;
+  threshold?: number;
 }) {
-  const { ref, inView } = useInViewOnce({ threshold: 0.95 });
+  const { ref, inView } = useInViewOnce({ threshold: threshold });
 
   return (
     <div

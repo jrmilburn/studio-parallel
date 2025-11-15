@@ -251,10 +251,73 @@ body {
   75%,100% { transform: translate3d(var(--cell), var(--cell), 0); }
 }
 
+/* BLOCK 11 — (0,-200) -> (0,-100) -> (0,0) */
+@keyframes block14 {
+  /* Idle at -200% until first move */
+  0%,37.5% {
+    transform: translate3d(0, calc(-2 * var(--cell)), 0);
+  }
+
+  /* Move 1 — down to -100% (37.5→50) */
+  37.5% {
+    animation-timing-function: var(--ease-in);
+  }
+  /* Anticipation: slightly further up from -200% */
+  40.0% {
+    transform: translate3d(
+      0,
+      calc((-2 - var(--anticipation)) * var(--cell)),
+      0
+    );
+  }
+  /* Overshoot: slightly below -100% (towards 0) */
+  71.875% {
+    transform: translate3d(
+      0,
+      calc((var(--overshoot) - 2) * var(--cell)),
+      0
+    );
+    animation-timing-function: var(--ease-out);
+  }
+  49.9% {
+    transform: translate3d(0, calc(-1 * var(--cell)), 0);
+  }
+  50%,62.5% {
+    transform: translate3d(0, calc(-1 * var(--cell)), 0);
+  }
+
+  /* Move 2 — down to 0 (62.5→75) */
+  62.5% {
+    animation-timing-function: var(--ease-in);
+  }
+  /* Anticipation: slightly above -100% again */
+  65.0% {
+    transform: translate3d(
+      0,
+      calc((-1 - var(--anticipation)) * var(--cell)),
+      0
+    );
+  }
+  /* Overshoot slightly below 0 */
+  71.875% {
+    transform: translate3d(
+      0,
+      calc((var(--overshoot) - 1) * var(--cell)),
+      0
+    );
+    animation-timing-function: var(--ease-out);
+  }
+  74.9% {
+    transform: translate3d(0, 0, 0);
+  }
+  75%,100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 
 /* Assignments */
-.block1, .block2, .block3, .block4, .block5, .block6, .block8, .block9, .block10 {
+.block1, .block2, .block3, .block4, .block5, .block6, .block8, .block9, .block10, .block14, .block15 {
   animation-duration: 1.5s;
   animation-fill-mode: forwards;
   animation-timing-function: linear; /* per-keyframe overrides when moving */
@@ -279,6 +342,14 @@ body {
   animation-name: block10
 }
 
+.block14 {
+  animation-name: block14
+}
+
+.block15 {
+  animation-name: block15
+}
+
 /* When observed in view, let it run */
 .in-view {
   animation-play-state: running;
@@ -290,5 +361,35 @@ body {
     animation: none !important;
     transform: none !important;
   }
+}
+
+.block11x {
+
+  transform: translateX(-200%) translateY(0%);
+
+}
+
+.block12y {
+
+  transform: translateX(0%) translateY(-200%);
+
+}
+
+.block13xy {
+
+  transform: translateX(-100%) translateY(-100%);
+
+}
+
+.block14y {
+
+  transform: translateX(0%) translateY(-200%);
+
+}
+
+.block15x {
+
+  transform: translateX(-200%) translateY(0%); 
+
 }
 

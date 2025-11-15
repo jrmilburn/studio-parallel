@@ -4,7 +4,7 @@ import RevealOnScroll from "./reveal-on-scroll"
 export default function WhatWeDo() {
 
     return (
-        <div className="relative h-screen flex flex-col items-start px-4 lg:px-16 py-16 gap-8">
+        <div className="relative h-screen flex flex-col items-start px-4 lg:px-16 py-16 gap-8" data-nav-theme="light">
             <p className="text-lg opacity-60">Studio Parallel in Action.</p>
             <h2 className="text-6xl mb-16">What we do.</h2>
             <div className="self-end flex flex-col items-start max-w-3xl gap-8">

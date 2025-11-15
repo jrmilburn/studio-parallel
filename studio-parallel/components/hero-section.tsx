@@ -5,7 +5,12 @@ import RevealOnScroll from "./reveal-on-scroll"
 export default function HeroSection() {
 
     return(
-        <section className="relative h-[calc(100vh-24px)] overflow-hidden bg-[#1C1C1E] rounded-b-4xl lg:mx-8">
+        <section 
+            id="hero"
+            data-hero="hero"
+            className="relative h-[calc(100vh-24px)] overflow-hidden bg-[#1C1C1E] rounded-b-4xl lg:mx-8"
+            data-nav-theme="dark"
+            >
             <HeroAnimation />
             <div className="container relative h-full flex flex-col items-start px-4 lg:px-16 gap-36 lg:gap-24 w-full justify-center">
                 <div className="flex flex-col w-full gap-2 z-10">
