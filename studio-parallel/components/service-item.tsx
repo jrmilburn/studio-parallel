@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 
 import PricingButton from "./pricing-button"
@@ -5,7 +7,9 @@ import RevealOnScroll from "./reveal-on-scroll"
 
 export default function ServiceItem({ heading, body, learnlink, pricinglink} : { heading : string, body : string, learnlink : string, pricinglink : string}) {
 
+
     return (
+        <>
         <RevealOnScroll>
         <div className="w-full flex justify-between items-center py-12 gap-16 text-white">
             <h3 className="text-4xl w-sm">{heading}</h3>
@@ -18,6 +22,7 @@ export default function ServiceItem({ heading, body, learnlink, pricinglink} : {
             </div>
         </div>
         </RevealOnScroll>
+        </>
     )
 
 }

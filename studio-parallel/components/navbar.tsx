@@ -6,6 +6,8 @@ import GetInTouch from "./get-in-touch";
 import NavItem from "./navitem";
 import RevealOnScroll from "./reveal-on-scroll";
 import Button from "./button";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 type NavTheme = "dark" | "light";
 
@@ -130,7 +132,7 @@ export default function Navbar() {
       {/* LEFT: logo (part of hero navbar) */}
       {showHeroNavContent ? (
         <RevealOnScroll delay={0}>
-          <h2 className={`flex-1 text-2xl ${textColorClass}`}>SP</h2>
+          <Link href="/" className={`flex-1 text-2xl ${textColorClass}`}>SP</Link>
         </RevealOnScroll>
       ) : (
         <div className="flex-1" />
@@ -174,26 +176,28 @@ export default function Navbar() {
 
       {/* RIGHT: compact CTA + menu – always mounted,
           but animated in/out based on `pastHero` */}
-      <div className="flex-1 flex justify-end items-center absolute right-7 top-5">
-        <RevealOnScroll
-          direction="up"
-          duration={0.4}
-          once={false}
-          active={pastHero} // <-- animate in when true, animate out when false
-        >
-          <div className="flex items-center gap-3">
+        <div className="pointer-events-none absolute right-7 top-5 overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }} // start slightly above / off-screen
+            animate={
+              pastHero
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: -24 }       // go back up/out the same way
+            }
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="pointer-events-auto flex items-center gap-3"
+          >
             {/* SCROLLED VERSION of GetInTouch */}
             <GetInTouch />
-
+          
             {/* Menu button */}
             <Button
               text="Menu"
               background="bg-[#D6D3D1]"
               textcolor="#000"
             />
-          </div>
-        </RevealOnScroll>
-      </div>
+          </motion.div>
+        </div>
     </nav>
   );
 }

@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const inter = Inter({
   subsets: ["latin"], // add more subsets if needed
@@ -18,7 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable}>
       <body className={`${inter.className} overflow-y-none bg-black`}>
         <Navbar />
+        <div className="min-h-screen">
         {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
