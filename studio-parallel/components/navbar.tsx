@@ -160,12 +160,12 @@ export default function Navbar() {
           </RevealOnScroll>
           <RevealOnScroll delay={0.2}>
             <li>
-              <NavItem text="Process," href="#process" />
+              <NavItem text="Process," href="/process" />
             </li>
           </RevealOnScroll>
           <RevealOnScroll delay={0.3}>
             <li>
-              <NavItem text="Works" href="#works" />
+              <NavItem text="Works" href="/works" />
             </li>
           </RevealOnScroll>
         </ul>

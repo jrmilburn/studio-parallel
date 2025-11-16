@@ -10,9 +10,9 @@ export default function Menu({ open, setOpen } : { open : boolean, setOpen : Rea
             <div className="flex flex-col justify-between text-white">
                 <h3 className="text-3xl">STUDIO PARALLEL</h3>
                 <ul className="flex flex-col">
-                    <Link className="text-[5vw]" href="/services"><AnimateIn shown={open} delay={open === false ? "delay-500" : "delay-400"}><HoverAnimate>Services</HoverAnimate></AnimateIn></Link>
-                    <Link className="text-[5vw]" href="/works"><AnimateIn shown={open} delay={open === false ? "delay-400" : "delay-500"}><HoverAnimate>Works</HoverAnimate></AnimateIn></Link>
-                    <Link className="text-[5vw]" href="/process"><AnimateIn shown={open} delay={open === false ? "delay-300" : "delay-600"}><HoverAnimate>Process</HoverAnimate></AnimateIn></Link>
+                    <Link className="text-[5vw]" href="/services" onClick={() => setOpen(false)}><AnimateIn shown={open} delay={open === false ? "delay-500" : "delay-400"}><HoverAnimate>Services</HoverAnimate></AnimateIn></Link>
+                    <Link className="text-[5vw]" href="/works" onClick={() => setOpen(false)}><AnimateIn shown={open} delay={open === false ? "delay-400" : "delay-500"}><HoverAnimate>Works</HoverAnimate></AnimateIn></Link>
+                    <Link className="text-[5vw]" href="/process" onClick={() => setOpen(false)}><AnimateIn shown={open} delay={open === false ? "delay-300" : "delay-600"}><HoverAnimate>Process</HoverAnimate></AnimateIn></Link>
                 </ul>
                 <div className="flex flex-col">
                     <Link href="/"><AnimateIn shown={open} delay={open === false ? "delay-200" : "delay-700"}><HoverAnimate>INSTAGRAM</HoverAnimate></AnimateIn></Link>
