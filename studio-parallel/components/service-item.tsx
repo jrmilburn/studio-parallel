@@ -2,10 +2,10 @@
 
 import Link from "next/link"
 
-import PricingButton from "./pricing-button"
 import RevealOnScroll from "./reveal-on-scroll"
+import HoverAnimate from "./hover-animate"
 
-export default function ServiceItem({ heading, body, learnlink, pricinglink} : { heading : string, body : string, learnlink : string, pricinglink : string}) {
+export default function ServiceItem({ heading, body, learnlink } : { heading : string, body : string, learnlink : string, pricinglink : string}) {
 
 
     return (
@@ -16,8 +16,7 @@ export default function ServiceItem({ heading, body, learnlink, pricinglink} : {
             <div className="flex flex-col items-start gap-6">
                 <p className="">{body}</p>
                 <div className="flex gap-4 items-center">
-                    <Link href={learnlink} className="flex flex-col group">Learn more<div className="w-[0] bg-white group-hover:w-full transition-all h-[1px]"></div></Link>
-                    <PricingButton link={pricinglink} />
+                    <Link href={learnlink} className="flex flex-col group"><HoverAnimate>Learn more</HoverAnimate><div className="w-[0] bg-white group-hover:w-full transition-all h-[1px]"></div></Link>
                 </div>
             </div>
         </div>

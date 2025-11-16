@@ -1,5 +1,7 @@
 "use client"
 
+import HoverAnimate from "./hover-animate";
+
 export default function Button({
   text,
   background,
@@ -23,7 +25,9 @@ export default function Button({
         gap-2 group cursor-pointer hover:scale-[1.01] transition-all
       `}
     >
+      <HoverAnimate>
       {text}
+      </HoverAnimate>
 
       <div className="relative w-[8px] h-[8px] flex items-center justify-center">
         <span

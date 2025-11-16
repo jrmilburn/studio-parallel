@@ -19,6 +19,7 @@ export interface PricingSectionData {
 
 // components/pricing-section.tsx
 import React from "react";
+import HoverAnimate from "./hover-animate";
 
 export interface PricingPlan {
   title: string;
@@ -144,7 +145,7 @@ export default function PricingSection({ data, onPlanSelect }: PricingSectionPro
 
             {/* Button */}
             <button
-              className={`mt-8 w-full py-3 rounded-lg font-medium text-sm tracking-wide transition-colors border
+              className={`mt-8 w-full py-3 rounded-full flex justify-center font-medium text-sm tracking-wide transition-colors border
                 ${
                   plan.mostPopular
                     ? "text-white shadow-[0_12px_40px_rgba(166,77,255,0.55)]"
@@ -161,7 +162,7 @@ export default function PricingSection({ data, onPlanSelect }: PricingSectionPro
               }
               onClick={() => onPlanSelect?.(plan)}
             >
-              {plan.buttonText}
+              <HoverAnimate><span className="w-full h-full">{plan.buttonText}</span></HoverAnimate>
             </button>
           </div>
         ))}

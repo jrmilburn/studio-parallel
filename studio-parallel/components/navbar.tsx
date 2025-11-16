@@ -9,6 +9,10 @@ import Button from "./button";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+import { useMenu } from "./menu-context";
+
+import Menu from "./menu";
+
 type NavTheme = "dark" | "light";
 
 export default function Navbar() {
@@ -18,6 +22,8 @@ export default function Navbar() {
 
   const navRef = useRef<HTMLElement | null>(null);
   const heroBottomRef = useRef<number | null>(null);
+
+  const { menuOpen, setMenuOpen } = useMenu();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -119,6 +125,7 @@ export default function Navbar() {
   const showHeroNavContent = !pastHero;
 
   return (
+    <>
     <nav
       ref={navRef}
       className={`
@@ -148,7 +155,7 @@ export default function Navbar() {
         >
           <RevealOnScroll delay={0.1}>
             <li>
-              <NavItem text="Services," href="#services" />
+              <NavItem text="Services," href="/services" />
             </li>
           </RevealOnScroll>
           <RevealOnScroll delay={0.2}>
@@ -191,13 +198,22 @@ export default function Navbar() {
             <GetInTouch />
           
             {/* Menu button */}
+            
             <Button
               text="Menu"
               background="bg-[#D6D3D1]"
               textcolor="#000"
+              onClick={() => setMenuOpen(true)}
             />
+
           </motion.div>
         </div>
     </nav>
+
+    <Menu 
+      open={menuOpen}
+      setOpen={setMenuOpen}
+    />
+    </>
   );
 }

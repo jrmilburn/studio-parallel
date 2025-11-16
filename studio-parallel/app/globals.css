@@ -393,3 +393,26 @@ body {
 
 }
 
+.menu-reveal {
+  /* Start fully hidden from the top */
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 700ms ease;
+}
+
+.menu-reveal-open {
+  /* Fully revealed */
+  clip-path: inset(0 0 0 0);
+}
+
+.menu-mask {
+  /* completely hidden from top */
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 700ms ease-out;
+}
+
+.menu-mask-open {
+  /* fully visible */
+  clip-path: inset(0 0 0 0);
+}
+
+

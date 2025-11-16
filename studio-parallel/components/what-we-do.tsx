@@ -1,10 +1,28 @@
+"use client"
+
+import { useState, useEffect } from "react"
+
 import Button from "./button"
 import RevealOnScroll from "./reveal-on-scroll"
+import Link from "next/link"
+import HoverAnimate from "./hover-animate"
 
 export default function WhatWeDo() {
 
+  const [hideScrollLink, setHideScrollLink] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 10000) setHideScrollLink(true);
+      else setHideScrollLink(false);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
     return (
-        <div className="relative h-screen flex flex-col items-start px-4 lg:px-16 py-16 gap-8" data-nav-theme="light">
+        <div className="relative h-screen flex flex-col items-start px-4 lg:px-16 py-16 gap-8" data-nav-theme="light" id="what-we-do">
             <p className="text-lg opacity-60">Studio Parallel in Action.</p>
             <h2 className="text-6xl mb-16">What we do.</h2>
             <div className="self-end flex flex-col items-start max-w-3xl gap-8">
@@ -13,6 +31,15 @@ export default function WhatWeDo() {
                 <RevealOnScroll><p className="text-lg">Reach out to see how we can help you today.</p></RevealOnScroll>
                 <Button text="See more" textcolor="#FFF" />
             </div>
+            <Link
+              href="#how-we-integrate"
+              className={`
+                text-black hidden md:inline-block absolute bottom-10 left-15 z-20 transition-opacity duration-500
+                ${hideScrollLink ? "opacity-0 pointer-events-none hidden" : "opacity-60"}
+              `}
+            >
+              <HoverAnimate>Scroll more</HoverAnimate>
+            </Link>
         </div>
     )
 

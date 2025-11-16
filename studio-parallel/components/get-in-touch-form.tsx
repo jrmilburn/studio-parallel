@@ -2,6 +2,9 @@ import { createPortal } from "react-dom";
 
 import MultiStepGetInTouchForm from "./form-flow";
 
+import AnimateIn from "./animate-in";
+import HoverAnimate from "./hover-animate";
+
 export default function GetInTouchForm({ visible, setVisible} : { visible : boolean; setVisible : React.Dispatch<React.SetStateAction<boolean>>}) {
 
     return createPortal(
@@ -22,11 +25,11 @@ export default function GetInTouchForm({ visible, setVisible} : { visible : bool
 
             <div className="flex justify-between gap-16 text-white">
                 <div className="flex flex-col gap-8 flex-1">
-                    <h3>Enquiry</h3>
-                    <p>To make an enquiry, we ask you provide some initial information about your goals so we can determine if we are the right fit for each other. We will review your request and get back to you within 2 business days.</p>
+                    <AnimateIn shown={visible} delay={visible === false ? "delay-100" : "delay-300"}><h3>Enquiry</h3></AnimateIn>
+                    <AnimateIn shown={visible} delay={visible === false ? "delay-0" : "delay-400"}><p>To make an enquiry, we ask you provide some initial information about your goals so we can determine if we are the right fit for each other. We will review your request and get back to you within 2 business days.</p></AnimateIn>
                 </div>
                 <div className="flex-1 flex flex-col gap-8">
-                    <button className="self-end cursor-pointer font-semibold" onClick={() => setVisible(false)}>Close</button>
+                    <button className="self-end cursor-pointer font-semibold cursor-pointer" onClick={() => setVisible(false)}><AnimateIn shown={visible} delay={visible === false ? "delay-0" : "delay-500"}><HoverAnimate>Close</HoverAnimate></AnimateIn></button>
                 </div>
             </div>
             <div className="">

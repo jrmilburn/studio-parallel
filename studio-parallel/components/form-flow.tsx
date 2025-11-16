@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import HoverAnimate from "./hover-animate";
 
 type WorkedWithDeveloper = "yes" | "no" | null;
 
@@ -9,6 +10,7 @@ type ProjectType =
   | "improve_existing"
   | "internal_tools"
   | "integrations"
+  | "technical_guidance"
   | "not_sure";
 
 type BudgetRange = "<5k" | "5k_15k" | "15k_30k" | "30k_plus" | null;
@@ -27,12 +29,22 @@ type HearAbout =
   | "other"
   | null;
 
+  type Platform =
+  | "web"
+  | "mobile"
+  | "web_and_mobile"
+  | "specialised"
+  | "not_sure"
+  | null;
+
+
 export interface GetInTouchFormData {
   name: string;
   email: string;
   phone: string;
   workedWithDeveloper: WorkedWithDeveloper;
   projectTypes: ProjectType[];
+  platform: Platform;          // 👈 NEW
   budgetRange: BudgetRange;
   timeline: Timeline;
   projectBrief: string;
@@ -44,7 +56,7 @@ interface MultiStepGetInTouchProps {
   onComplete?: (data: GetInTouchFormData) => void;
 }
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 7;
 
 function optionButtonBase(active: boolean) {
   return [
@@ -66,6 +78,7 @@ export default function MultiStepGetInTouchForm({
     phone: "",
     workedWithDeveloper: null,
     projectTypes: [],
+    platform: null,              // 👈 NEW
     budgetRange: null,
     timeline: null,
     projectBrief: "",
@@ -101,15 +114,18 @@ export default function MultiStepGetInTouchForm({
       case 3:
         return data.projectTypes.length > 0;
       case 4:
-        return data.budgetRange !== null;
+        return data.platform !== null;           // 👈 NEW
       case 5:
-        return data.timeline !== null;
+        return data.budgetRange !== null;
       case 6:
+        return data.timeline !== null;
+      case 7:
         return data.projectBrief.trim().length > 0;
       default:
         return true;
     }
   };
+
 
   const handleNext = () => {
     if (!isStepValid()) return;
@@ -269,6 +285,15 @@ export default function MultiStepGetInTouchForm({
               <button
                 type="button"
                 className={optionButtonBase(
+                  data.projectTypes.includes("technical_guidance")
+                )}
+                onClick={() => toggleProjectType("technical_guidance")}
+              >
+                SOFTWARE / TECHNICAL GUIDANCE
+              </button>
+              <button
+                type="button"
+                className={optionButtonBase(
                   data.projectTypes.includes("not_sure")
                 )}
                 onClick={() => toggleProjectType("not_sure")}
@@ -280,6 +305,76 @@ export default function MultiStepGetInTouchForm({
         )}
 
         {step === 4 && (
+          <div className="space-y-4">
+            <p className="text-sm md:text-base font-medium">
+              How will people use this software day to day?{" "}
+              <span className="text-red-500">*</span>
+              <span className="text-slate-400 text-xs ml-1">
+                (this helps me understand whether it&apos;s web, mobile, or something else)
+              </span>
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <button
+                type="button"
+                className={optionButtonBase(data.platform === "web")}
+                onClick={() => update("platform", "web")}
+              >
+                WEB APP IN THE BROWSER  
+                <span className="block text-[11px] mt-1 text-slate-300">
+                  (laptop / desktop / phone via a website)
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className={optionButtonBase(data.platform === "mobile")}
+                onClick={() => update("platform", "mobile")}
+              >
+                MOBILE APP ONLY  
+                <span className="block text-[11px] mt-1 text-slate-300">
+                  (downloaded from the App Store / Google Play)
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className={optionButtonBase(data.platform === "web_and_mobile")}
+                onClick={() => update("platform", "web_and_mobile")}
+              >
+                WEB + MOBILE EXPERIENCE  
+                <span className="block text-[11px] mt-1 text-slate-300">
+                  (works in the browser and has a mobile presence)
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className={optionButtonBase(data.platform === "specialised")}
+                onClick={() => update("platform", "specialised")}
+              >
+                SPECIALISED SETUP  
+                <span className="block text-[11px] mt-1 text-slate-300">
+                  (desktop software, on-prem systems, hardware, etc.)
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className={optionButtonBase(data.platform === "not_sure")}
+                onClick={() => update("platform", "not_sure")}
+              >
+                NOT SURE YET  
+                <span className="block text-[11px] mt-1 text-slate-300">
+                  I&apos;d like guidance on the best approach
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
+
+
+        {step === 5 && (
           <div className="space-y-4">
             <p className="text-sm md:text-base font-medium">
               Project budget range (if known)
@@ -323,7 +418,7 @@ export default function MultiStepGetInTouchForm({
           </div>
         )}
 
-        {step === 5 && (
+        {step === 6 && (
           <div className="space-y-4">
             <p className="text-sm md:text-base font-medium">
               Project timeline for design and/or build (if known)
@@ -362,7 +457,7 @@ export default function MultiStepGetInTouchForm({
           </div>
         )}
 
-        {step === 6 && (
+        {step === 7 && (
           <div className="space-y-5">
             <div className="space-y-2">
               <p className="text-sm md:text-base font-medium">
@@ -453,7 +548,7 @@ export default function MultiStepGetInTouchForm({
               : "bg-slate-600 text-slate-300 cursor-not-allowed"}
           `}
         >
-          {nextLabel.toUpperCase()} →
+          <HoverAnimate>{nextLabel.toUpperCase()} →</HoverAnimate>
         </button>
       </footer>
     </section>
