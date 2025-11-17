@@ -67,7 +67,7 @@ export default function ClinikoIntegrationDiagram() {
       role: "Integration layer",
       description:
         "A small cloud service that regularly checks Cliniko for changes and updates GoHighLevel automatically in the background.",
-      tech: ["Node.js", "Express", "Cron"],
+      tech: ["Node.js", "Express", "Cron", "AWS EC2"],
       x: 50,
       y: 65,
     },

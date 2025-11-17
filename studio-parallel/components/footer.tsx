@@ -42,7 +42,7 @@ export default function Footer() {
 
             <GetInTouch
               text="Contact"
-              className="mt-4 leading-[0.9] text-3xl sm:text-4xl lg:text-5xl"
+              className=" leading-[0.9] text-3xl sm:text-4xl lg:text-5xl"
             />
           </ul>
 
