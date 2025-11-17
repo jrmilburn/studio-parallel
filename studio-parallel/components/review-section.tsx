@@ -62,12 +62,14 @@ export default function ReviewSection() {
                 heading={`“Admin time is the number one take away from my business. Studio Parallel’s integration meant I no longer spend time double handling data.”`}
                 name="Rachele Milburn"
                 position="Manager, Caribeae Swimming Academy"
+                casestudy="/works/caribeae"
             />
             <ReviewCard 
-                image="/"
+                image="/hayden.jpeg"
                 heading={`“Handling client and scheduling data manually was the biggest thing holding our business back. SP’s custom software for our business has taken the stress off data handling and given me hours of time back.”`}
                 name="Hayden Richardson"
                 position="Founder, Flowchannels"
+                casestudy="/works/cliniko"
             />
             </div>
         </section>

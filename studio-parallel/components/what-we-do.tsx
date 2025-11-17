@@ -29,17 +29,8 @@ export default function WhatWeDo() {
                 <RevealOnScroll><h3 className="text-4xl">We specialise in the development and integration of software solutions for business.</h3></RevealOnScroll>
                 <RevealOnScroll><p className="text-lg">While commercial software solutions are great, we recognise that sometimes you need something a little more tailored.</p></RevealOnScroll>
                 <RevealOnScroll><p className="text-lg">Reach out to see how we can help you today.</p></RevealOnScroll>
-                <Button text="See more" textcolor="#FFF" />
+                <Link href="#how-we-integrate"><Button text="See more" textcolor="#FFF" /></Link>
             </div>
-            <Link
-              href="#how-we-integrate"
-              className={`
-                text-black hidden md:inline-block absolute bottom-10 left-15 z-20 transition-opacity duration-500
-                ${hideScrollLink ? "opacity-0 pointer-events-none hidden" : "opacity-60"}
-              `}
-            >
-              <HoverAnimate>Scroll more</HoverAnimate>
-            </Link>
         </div>
     )
 

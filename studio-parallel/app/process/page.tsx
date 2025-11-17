@@ -17,7 +17,7 @@ export default function ProcessPage() {
 
 function ProcessIntro() {
   return (
-    <section className="px-6 lg:px-16 py-20">
+    <section className="px-6 lg:px-16 py-20" id="process">
       <div className="max-w-5xl mx-auto space-y-8">
         <div className="space-y-4">
           <p className="text-xs tracking-[0.25em] uppercase text-black/40">

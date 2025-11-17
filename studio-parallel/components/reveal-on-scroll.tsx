@@ -19,6 +19,7 @@ type RevealOnScrollProps = {
    * is shown or hidden, instead of using the in-view state.
    */
   active?: boolean;
+  className?: string;
 };
 
 export default function RevealOnScroll({
@@ -31,6 +32,7 @@ export default function RevealOnScroll({
   staggerChildren = false,
   duration = 0.5,
   active,
+  className
 }: RevealOnScrollProps) {
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -72,6 +74,7 @@ export default function RevealOnScroll({
       initial="hidden"
       animate={shouldShow ? "show" : "hidden"}
       style={{ overflow: "hidden", willChange: "transform, opacity" }}
+      className={className}
     >
       {staggerChildren ? (
         <div style={{ display: "inline-block" }}>

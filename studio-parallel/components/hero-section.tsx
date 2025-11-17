@@ -40,7 +40,7 @@ export default function HeroSection() {
                 <RevealOnScroll delay={0.2}>
                 <p className="text-lg lg:text-3xl text-white lg:max-w-1/2 leading-relaxed z-10">Building and integrating custom software solutions into your workflows to maximise productivity.</p>
                 </RevealOnScroll>
-                <RevealOnScroll delay={0.3}><HeroButton /></RevealOnScroll>
+                <RevealOnScroll delay={0.3}><Link href="#what-we-do"><HeroButton /></Link></RevealOnScroll>
             </div>
                   <Link
                       href="#what-we-do"

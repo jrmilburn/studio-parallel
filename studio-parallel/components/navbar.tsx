@@ -131,7 +131,7 @@ export default function Navbar() {
       className={`
         w-full h-16 lg:h-24 fixed top-0 z-50
         flex items-center px-2 lg:px-16
-        bg-transparent
+        bg-transparent justify-between 
         transition-transform duration-300 ease-out
         ${inHeroBody ? "-translate-y-full" : "translate-y-0"}
       `}
@@ -173,7 +173,7 @@ export default function Navbar() {
 
       {/* RIGHT: hero GetInTouch (part of hero navbar) */}
       {showHeroNavContent && (
-        <RevealOnScroll delay={0.4}>
+        <RevealOnScroll delay={0.4} className="justify-self-end">
           <div className="flex-1 flex justify-end items-center">
             {/* HERO VERSION */}
             <GetInTouch />

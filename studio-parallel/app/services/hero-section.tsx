@@ -40,16 +40,8 @@ export default function HeroSection() {
                 <RevealOnScroll delay={0.2}>
                 <p className="text-lg lg:text-3xl text-white lg:max-w-[60%] leading-relaxed z-10">Your systems, your workflows, your constraints, your goals.</p>
                 </RevealOnScroll>
-                <RevealOnScroll delay={0.3}><HeroButton /></RevealOnScroll>
+                <RevealOnScroll delay={0.3}><Link href="#services"><HeroButton text="How we work" /></Link></RevealOnScroll>
             </div>
-                  <Link
-                      href="#what-we-do"
-                      className={`
-                        text-white hidden md:inline-block fixed bottom-10 right-15 z-20 transition-opacity duration-500
-                        ${hideScrollLink ? "opacity-0 pointer-events-none" : "opacity-60"}
-                      `}
-                    >
-                    </Link>
         </section>
     )
 

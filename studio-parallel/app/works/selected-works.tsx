@@ -38,7 +38,7 @@ const works: Work[] = [
       stack: "Node.js, Express, Prisma, PostgreSQL, Cron jobs, GoHighLevel API, Cliniko API, AWS EC2",
       outcome:
         "A dependable, self-correcting sync system that updates GoHighLevel whenever Cliniko data changes. Reduces administrative overhead, removes repetitive data entry, and ensures accurate records across systems without relying on third-party middleware.",
-      href: "/works/cliniko-integration" // optional
+      href: "/works/cliniko" // optional
     },
   {
     number: "03",
@@ -50,7 +50,7 @@ const works: Work[] = [
     stack: "Next.js, Prisma, PostgreSQL, Tailwind",
     outcome:
       "Faster decision-making, less context switching, and a clearer view of where to invest development time.",
-    href: "/works/studio-toolkit",
+    href: "",
   },
 ];
 
@@ -139,7 +139,7 @@ function WorkCard({ work }: { work: Work }) {
                 className="inline-flex items-center gap-2 text-black/80 text-sm lg:text-base group"
               >
                 <span className="underline underline-offset-4 decoration-black/30 group-hover:decoration-black">
-                  <HoverAnimate>View case study</HoverAnimate>
+                  <HoverAnimate>View case study {href === "" && "(Coming soon)"}</HoverAnimate>
                 </span>
                 <span className="text-xs translate-y-[1px] group-hover:translate-x-0.5 transition-transform">
                   →

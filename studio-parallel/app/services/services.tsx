@@ -104,7 +104,7 @@ function Service({
         </div>
 
         {/* Right column */}
-        <div className="space-y-4">
+        <div className="space-y-4 self-center">
           <p className="text-xs tracking-[0.25em] uppercase text-black/40">
             What’s Included
           </p>
@@ -125,17 +125,17 @@ function Service({
 
 export function ServicesIntro() {
   return (
-    <section className="px-6 lg:px-16 py-20 bg-white text-black">
+    <section className="px-6 lg:px-16 py-20 bg-white text-black" id="services">
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Label + Heading */}
         <div className="space-y-4">
           <p className="text-xs tracking-[0.25em] uppercase text-black/40">
             Services
           </p>
-          <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-8">
             Three ways to work with Studio Parallel.
           </h2>
-          <p className="text-base lg:text-lg text-black/60 max-w-2xl">
+          <p className="text-base lg:text-lg text-black/60 max-w-2xl mb-8">
             Every business we work with is different — but most needs fall into one
             of three patterns. Ongoing support, a new system, or better connections
             between the tools you already use. Our services are shaped around those

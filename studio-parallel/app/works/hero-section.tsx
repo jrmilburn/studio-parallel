@@ -57,22 +57,12 @@ export default function WorksHeroSection() {
         <RevealOnScroll delay={0.3}>
           <div className="flex flex-col sm:flex-row gap-4 z-10">
             {/* Primary CTA – same HeroButton for consistency */}
-            <HeroButton />
+            <Link href="#works">
+            <HeroButton text="Selected works" />
+            </Link>
           </div>
         </RevealOnScroll>
       </div>
-
-      {/* Scroll down hint */}
-      <Link
-        href="#works"
-        className={`
-          text-white hidden md:inline-block fixed bottom-10 right-10 z-20 
-          transition-opacity duration-500
-          ${hideScrollLink ? "opacity-0 pointer-events-none" : "opacity-60"}
-        `}
-      >
-        <HoverAnimate>See works</HoverAnimate>
-      </Link>
     </section>
   );
 }
