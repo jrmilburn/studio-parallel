@@ -102,7 +102,7 @@ export default function ClinikoIntegrationDiagram() {
   return (
     <>
     <HeroSection />
-    <section className="px-6 lg:px-0 py-12" id="cliniko">
+    <section className="px-6 lg:px-0 py-12 h-screen" id="cliniko">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header + toggle */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">

@@ -110,7 +110,7 @@ export default function CaribeaePlatformDiagram() {
   ];
 
   return (
-    <section className="px-6 lg:px-0 py-12">
+    <section className="px-6 lg:px-0 py-12 h-screen">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header + toggle */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
