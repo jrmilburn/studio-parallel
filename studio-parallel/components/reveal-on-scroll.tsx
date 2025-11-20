@@ -1,9 +1,14 @@
 // components/RevealOnScroll.tsx
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useInView,
+  type Variants,
+  type Transition,
+} from "framer-motion";
 import { useRef } from "react";
-import { useInView } from "framer-motion";
 
 type RevealOnScrollProps = {
   children: React.ReactNode;
@@ -32,7 +37,7 @@ export default function RevealOnScroll({
   staggerChildren = false,
   duration = 0.5,
   active,
-  className
+  className,
 }: RevealOnScrollProps) {
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -40,27 +45,32 @@ export default function RevealOnScroll({
 
   const y = prefersReducedMotion ? 0 : direction === "up" ? distance : -distance;
 
-  const parent = {
+  // Build a base transition so we don't create a union type
+  const baseChildTransition: Transition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration, ease: "easeOut" };
+
+  const parent: Variants = {
     hidden: {},
     show: {
-      transition: staggerChildren
-        ? { staggerChildren: 0.06, delayChildren: delay }
-        : { delay: 0 },
+      transition: {
+        // When staggerChildren is false these just become 0, which is fine
+        staggerChildren: staggerChildren ? 0.06 : 0,
+        delayChildren: staggerChildren ? delay : 0,
+      },
     },
   };
 
-  const child = {
+  const child: Variants = {
     hidden: { opacity: 0, y },
     show: {
       opacity: 1,
       y: 0,
-      transition: prefersReducedMotion
-        ? { duration: 0 }
-        : {
-            duration,
-            ease: "easeOut",
-            delay: staggerChildren ? 0 : delay,
-          },
+      transition: {
+        ...baseChildTransition,
+        // Only actually matters when NOT staggering, but always defined
+        delay: staggerChildren ? 0 : delay,
+      },
     },
   };
 
@@ -80,7 +90,11 @@ export default function RevealOnScroll({
         <div style={{ display: "inline-block" }}>
           {Array.isArray(children) ? (
             (children as React.ReactNode[]).map((c, i) => (
-              <motion.span key={i} variants={child} style={{ display: "inline-block" }}>
+              <motion.span
+                key={i}
+                variants={child}
+                style={{ display: "inline-block" }}
+              >
                 {c}
               </motion.span>
             ))
