@@ -2,7 +2,7 @@ import ServiceItem from "./service-item";
 
 export default function ServiceLine() {
   return (
-    <div className="flex flex-col max-w-2xl self-end">
+    <div className="flex flex-col w-full max-w-none md:max-w-2xl self-end">
       <div className="w-full bg-white h-[1px]" />
 
       <ServiceItem
