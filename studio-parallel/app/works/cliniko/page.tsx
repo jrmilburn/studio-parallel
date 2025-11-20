@@ -102,10 +102,10 @@ export default function ClinikoIntegrationDiagram() {
   return (
     <>
     <HeroSection />
-    <section className="px-6 lg:px-0 py-12 h-screen" id="cliniko">
+    <section className="px-6 lg:px-0 py-12 min-h-screen" id="cliniko">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header + toggle */}
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-4 md:flex-row lg:items-center lg:justify-between">
           <div className="space-y-2">
             <p className="text-xs tracking-[0.25em] uppercase text-black/40">
               System Overview
@@ -120,7 +120,17 @@ export default function ClinikoIntegrationDiagram() {
           </div>
 
           {/* Toggle */}
-          <div className="inline-flex items-center rounded-full border border-black/10 bg-white p-1 text-xs lg:text-sm">
+          <div
+            className="
+              inline-flex
+              w-fit
+              self-start
+              justify-start items-center
+              rounded-full border border-black/10
+              bg-white p-1
+              text-xs lg:text-sm
+            "
+          >
             <button
               type="button"
               onClick={() => setMode("before")}

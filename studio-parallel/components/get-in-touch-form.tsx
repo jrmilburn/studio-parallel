@@ -21,14 +21,14 @@ export default function GetInTouchForm({ visible, setVisible} : { visible : bool
               ${visible ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"}
             `}
           >
-            <div className="max-w-[25%] w-full absolute left-0 top-0 h-[4px] bg-white z-[101]"></div>
+            <div className="md:max-w-[25%] w-full absolute left-0 top-0 h-[4px] bg-white z-[101]"></div>
 
             <div className="flex justify-between gap-16 text-white">
-                <div className="flex flex-col gap-8 flex-1">
+                <div className="flex flex-col gap-8 flex-2 md:flex-1">
                     <AnimateIn shown={visible} delay={visible === false ? "delay-100" : "delay-300"}><h3>Enquiry</h3></AnimateIn>
                     <AnimateIn shown={visible} delay={visible === false ? "delay-0" : "delay-400"}><p>To make an enquiry, we ask you provide some initial information about your goals so we can determine if we are the right fit for each other. We will review your request and get back to you within 2 business days.</p></AnimateIn>
                 </div>
-                <div className="flex-1 flex flex-col gap-8">
+                <div className="md:flex-1 flex flex-col gap-8">
                     <button className="self-end cursor-pointer font-semibold cursor-pointer" onClick={() => setVisible(false)}><AnimateIn shown={visible} delay={visible === false ? "delay-0" : "delay-500"}><HoverAnimate>Close</HoverAnimate></AnimateIn></button>
                 </div>
             </div>

@@ -1,64 +1,74 @@
-"use client"
+"use client";
 
 import GetInTouch from "@/components/get-in-touch";
+import HoverAnimate from "@/components/hover-animate";
+import Link from "next/link";
 
 export default function Services() {
-
   return (
     <section className="px-6 lg:px-16 py-24 bg-white text-black space-y-24 flex flex-col gap-32 my-16">
-      {/* 01 — CORE */}
-      <Service
-        number="01"
-        heading="CORE"
-        tagline="Your embedded engineer — on demand."
-        body={`A flexible monthly retainer for continuous improvements, backend development, integrations, automations, and workflow optimisation. Ideal for teams that need senior technical support and ongoing development without the overhead of a full-time hire.`}
-        included={[
-          "Backend development & refactoring",
-          "New features & enhancements",
-          "Workflow automation & scripting",
-          "API integrations",
-          "System optimisation & cleanup",
-          "Data syncing & internal tooling",
-          "Technical guidance & architecture support",
-          "Ongoing monitoring & improvements",
-        ]}
-      />
+      {/* 01 — INTEGRATE */}
+      <div className="h-screen flex items-center" id="integrate">
+        <Service
+          number="01"
+          heading="INTEGRATE"
+          tagline="Make your tools talk to each other."
+          body={`We connect the tools you already use so data moves automatically and your team stops copy-pasting. Perfect when the problem is “too many disconnected systems”, not “no system at all.”`}
+          processFit={`Often the first implementation step after the Blueprint when your main issue is disconnected tools. We start with the highest-friction workflow and automate it end-to-end.`}
+          included={[
+            "Audit of current tools, data flows & bottlenecks",
+            "Integration & automation architecture design",
+            "API integrations between key systems (CRM, billing, booking, etc.)",
+            "Webhook-based event handling & background jobs",
+            "Data syncing, transformation & validation",
+            "Internal dashboards or admin tools over integrated systems",
+            "Logging, error handling & alerts for critical workflows",
+            "Technical documentation & knowledge transfer",
+          ]}
+        />
+      </div>
 
       {/* 02 — BUILD */}
-      <Service
-        number="02"
-        heading="BUILD"
-        tagline="Your system, fully custom."
-        body={`Project-based engagements to design and build software that fits the way your business actually operates. From internal tools and client portals to full applications, we handle architecture, development, and launch so you end up with a system that feels built just for you — because it is.`}
-        included={[
-          "Discovery workshops & requirements definition",
-          "User flows, UX structure & interface planning",
-          "Technical architecture & system design",
-          "Full-stack development (frontend, backend & database)",
-          "Integration with existing tools & APIs",
-          "Testing, QA & performance optimisation",
-          "Deployment, hosting & environment setup",
-          "Handover, documentation & transition into CORE for ongoing support",
-        ]}
-      />
+      <div className="h-screen flex items-center" id="build">
+        <Service
+          number="02"
+          heading="BUILD"
+          tagline="Your system, fully custom."
+          body={`We design and build software around how your business actually works — internal tools, client portals, or full platforms. You get a system that maps to your workflows instead of forcing you to bend to someone else’s product.`}
+          processFit={`Used after the Discovery Call + Blueprint when you need a new system. We turn the agreed plan into a working product, delivered in clear, testable slices.`}
+          included={[
+            "Discovery & requirements based on your Blueprint",
+            "User flows, UX structure & interface planning",
+            "Technical architecture & system design",
+            "Full-stack development (frontend, backend, database)",
+            "Integration with existing tools & APIs",
+            "Testing, QA & performance optimisation",
+            "Deployment, hosting & environment setup",
+            "Handover, documentation & option to move into CORE",
+          ]}
+        />
+      </div>
 
-      {/* 03 — INTEGRATE */}
-      <Service
-        number="03"
-        heading="INTEGRATE"
-        tagline="Make your tools talk to each other."
-        body={`Focused integration and automation work to connect your existing systems, remove manual steps, and keep data flowing cleanly between tools. Ideal for teams drowning in copy–paste workflows, double entry, or systems that were never designed to work together.`}
-        included={[
-          "Audit of your current tools, data flows & bottlenecks",
-          "Design of integration & automation architecture",
-          "API integrations between key systems (CRM, billing, booking, internal apps, etc.)",
-          "Webhook-based event handling & background jobs",
-          "Data syncing, transformation & validation",
-          "Internal dashboards or admin tools around integrated systems",
-          "Logging, error handling & alerting for critical workflows",
-          "Technical documentation & knowledge transfer",
-        ]}
-      />
+      {/* 03 — CORE */}
+      <div className="h-screen flex items-center" id="core">
+        <Service
+          number="03"
+          heading="CORE"
+          tagline="Your embedded engineer — on demand."
+          body={`A flexible monthly retainer for continuous improvements, fixes and small builds. Ideal once your main system or integrations are live and you want a trusted partner to keep everything moving.`}
+          processFit={`Comes after a Build or Integrate project once the main system is in place. We keep your stack healthy, ship from a shared backlog and respond to new priorities each month.`}
+          included={[
+            "Small features and improvements shipped regularly",
+            "Backend development & refactoring",
+            "Workflow automation tweaks & scripting",
+            "New or updated API integrations",
+            "Performance, reliability & cleanup work",
+            "Internal tools and dashboards",
+            "Architecture & technical guidance",
+            "Monitoring, bug triage & fixes",
+          ]}
+        />
+      </div>
     </section>
   );
 }
@@ -68,12 +78,14 @@ function Service({
   heading,
   tagline,
   body,
+  processFit,
   included,
 }: {
   number: string;
   heading: string;
   tagline: string;
   body: string;
+  processFit: string;
   included: string[];
 }) {
   return (
@@ -99,6 +111,16 @@ function Service({
             <p className="text-lg lg:text-xl text-black/80">{tagline}</p>
             <p className="text-base lg:text-lg text-black/60 max-w-xl">
               {body}
+            </p>
+          </div>
+
+          {/* Where this fits */}
+          <div className="space-y-1">
+            <p className="text-xs tracking-[0.25em] uppercase text-black/40">
+              Where this fits
+            </p>
+            <p className="text-sm lg:text-base text-black/70 max-w-xl">
+              {processFit}
             </p>
           </div>
         </div>
@@ -132,74 +154,110 @@ export function ServicesIntro() {
           <p className="text-xs tracking-[0.25em] uppercase text-black/40">
             Services
           </p>
-          <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-8">
+          <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-6">
             Three ways to work with Studio Parallel.
           </h2>
-          <p className="text-base lg:text-lg text-black/60 max-w-2xl mb-8">
-            Every business we work with is different — but most needs fall into one
-            of three patterns. Ongoing support, a new system, or better connections
-            between the tools you already use. Our services are shaped around those
-            realities so you get exactly what you need, without the noise.
+          <p className="text-base lg:text-lg text-black/60 max-w-2xl">
+            Most work falls into one of three modes: connecting the tools you already
+            use, building something new around your workflows, or keeping an embedded
+            engineer on your side long-term.
           </p>
         </div>
 
-        {/* Tiny overview of the three modes */}
-        <div className="grid gap-8 md:grid-cols-3">
+        {/* Overview of the three modes */}
+        <div className="grid gap-8 md:grid-cols-3 pt-4">
           <div className="space-y-2">
             <p className="text-xs tracking-[0.25em] uppercase text-black/40">
-              01 · Core
+              <Link href="#integrate">
+                <HoverAnimate>01 · Integrate</HoverAnimate>
+              </Link>
             </p>
             <p className="text-sm lg:text-base text-black/70">
-              A monthly embedded engineer to maintain, improve and extend your
-              existing systems.
+              When your tools are fine, but they don’t talk. We connect them and
+              automate the repetitive work.
             </p>
           </div>
 
           <div className="space-y-2">
             <p className="text-xs tracking-[0.25em] uppercase text-black/40">
-              02 · Build
+              <Link href="#build">
+                <HoverAnimate>02 · Build</HoverAnimate>
+              </Link>
             </p>
             <p className="text-sm lg:text-base text-black/70">
-              Project-based builds for new products, internal tools, platforms and
-              client-facing systems.
+              When your Blueprint shows you need a new product, portal or internal
+              system built around your workflows.
             </p>
           </div>
 
           <div className="space-y-2">
             <p className="text-xs tracking-[0.25em] uppercase text-black/40">
-              03 · Integrate
+              <Link href="#core">
+                <HoverAnimate>03 · Core</HoverAnimate>
+              </Link>
             </p>
             <p className="text-sm lg:text-base text-black/70">
-              Integrations and automations that connect your stack and remove
-              manual, repetitive work.
+              Ongoing help from an embedded engineer once your core system or
+              integrations are in place.
             </p>
           </div>
+        </div>
+
+        {/* How it works – below, non-numbered */}
+        <div className="pt-6 border-t border-black/10 mt-4 space-y-4">
+          <div className="space-y-3 text-sm lg:text-base text-black/70">
+            <p className="font-medium">How it works in practice:</p>
+
+            <ul className="space-y-2 list-disc list-inside">
+              <li>
+                <span className="font-medium">Discovery call</span> — we talk through
+                your business, systems and bottlenecks.
+              </li>
+              <li>
+                <span className="font-medium">Blueprint</span> — we map the key
+                workflows, interfaces and implementation options.
+              </li>
+              <li>
+                <span className="font-medium">Implementation</span> — we execute
+                through <span className="font-semibold">Integrate</span> or{" "}
+                <span className="font-semibold">Build</span>, then support you
+                long-term with <span className="font-semibold">Core</span> if it
+                makes sense.
+              </li>
+            </ul>
+          </div>
+
+          {/* Subtle Process Page Link */}
+          <Link
+            href="/process"
+            className="text-xs lg:text-sm text-black/40 transition-colors flex items-center gap-1 group"
+          >
+            <HoverAnimate>View the full process</HoverAnimate> <span aria-hidden className="group-hover:translate-x-[2px] transition-all">→</span>
+          </Link>
         </div>
       </div>
     </section>
   );
 }
 
-export function ServicesCTA() {
 
+
+export function ServicesCTA() {
   return (
     <section className="px-6 lg:px-16 py-32 bg-white text-black border-t border-black/10">
       <div className="max-w-4xl mx-auto text-center space-y-8 flex flex-col items-center">
-
         <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight">
-          Ready to build something that fits your business?
+          Start with a simple conversation.
         </h2>
 
         <p className="text-lg lg:text-xl text-black/60 max-w-2xl mx-auto">
-          Tell us about your goals, systems, and challenges. We’ll prepare a tailored proposal
-          and recommend the best way to work together.
+          Share where your systems are today and where you want them to be. We’ll
+          recommend a path, outline a Blueprint, and show whether Integrate, Build
+          or Core is the best next step.
         </p>
 
         <GetInTouch />
-
       </div>
     </section>
   );
 }
-
-

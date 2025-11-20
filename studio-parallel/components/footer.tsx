@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-4 flex w-full flex-col gap-4 border-t border-black/40 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-4 flex w-full flex-col gap-4 border-black/40 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs sm:text-sm md:text-base">
             © 2025 Studio Parallel. All Rights Reserved.
           </p>
@@ -84,11 +84,11 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="mt-10 mb-8 h-px w-full bg-black/70" />
+        <div className="mt-2 mb-8 h-px w-full bg-black/70" />
 
         {/* Brand wordmark */}
         <RevealOnScroll>
-          <h3 className="text-center leading-none tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-[8vw]">
+          <h3 className="text-center leading-none tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-[7vw] mx-auto">
             STUDIO PARALLEL
           </h3>
         </RevealOnScroll>

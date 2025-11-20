@@ -110,7 +110,7 @@ export default function CaribeaePlatformDiagram() {
   ];
 
   return (
-    <section className="px-6 lg:px-0 py-12 h-screen">
+    <section className="px-6 lg:px-0 py-16 min-h-screen">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header + toggle */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -128,7 +128,17 @@ export default function CaribeaePlatformDiagram() {
           </div>
 
           {/* Toggle */}
-          <div className="inline-flex items-center rounded-full border border-black/10 bg-white p-1 text-xs lg:text-sm">
+          <div
+            className="
+              inline-flex
+              w-fit
+              self-start
+              justify-start items-center
+              rounded-full border border-black/10
+              bg-white p-1
+              text-xs lg:text-sm
+            "
+          >
             <button
               type="button"
               onClick={() => setMode("before")}
@@ -149,7 +159,7 @@ export default function CaribeaePlatformDiagram() {
                   : "text-black/60 hover:text-black"
               }`}
             >
-              New platform
+              New system
             </button>
           </div>
         </div>

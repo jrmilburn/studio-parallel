@@ -11,21 +11,22 @@ export default function HeroSection() {
       data-nav-theme="light"
       className="
         relative
-        h-[calc(100vh-16px)]
+        min-h-[calc(100vh-16px)]
         lg:h-[calc(100vh-24px)]
         bg-white 
         lg:mx-8 
         text-black
+        pt-16
       "
     >
-      <div className="relative h-full flex flex-col lg:flex-row">
+      <div className="relative h-full flex flex-col-reverse md:flex-row">
 
         {/* Portrait side */}
         <div
           className="
             w-full lg:w-5/12
             relative
-            h-64 sm:h-80 lg:h-full
+            h-120 sm:h-120 lg:h-full
             mb-6 lg:mb-0
           "
         >
@@ -34,7 +35,7 @@ export default function HeroSection() {
             alt="Founder of Flowchannels"
             fill
             priority
-            className="object-cover object-center rounded-3xl"
+            className="object-cover object-top rounded-3xl"
           />
         </div>
 
@@ -73,7 +74,7 @@ export default function HeroSection() {
                 happens in the background — we don’t even think about it.”
               </blockquote>
               <figcaption className="text-xs md:text-sm text-black/50 my-2">
-                Hayden Richardson, Founder — Flowchannels
+                Hayden Richardson, Founder - Flowchannels
               </figcaption>
               </RevealOnScroll>
             </figure>

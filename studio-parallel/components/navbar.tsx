@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useMenu } from "./menu-context";
 
 import Menu from "./menu";
+import HoverAnimate from "./hover-animate";
 
 type NavTheme = "dark" | "light";
 
@@ -139,7 +140,7 @@ export default function Navbar() {
       {/* LEFT: logo (part of hero navbar) */}
       {showHeroNavContent ? (
         <RevealOnScroll delay={0}>
-          <Link href="/" className={`flex-1 text-2xl ${textColorClass}`}>SP</Link>
+          <Link href="/" className={`flex-1 text-2xl ${textColorClass}`}><HoverAnimate>SP</HoverAnimate></Link>
         </RevealOnScroll>
       ) : (
         <div className="flex-1" />
