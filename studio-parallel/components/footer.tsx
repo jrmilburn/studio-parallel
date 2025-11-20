@@ -6,7 +6,7 @@ import GetInTouch from "./get-in-touch";
 export default function Footer() {
   return (
     <footer className="bg-[#A64DFF] text-black">
-      <div className="mx-auto flex min-h-screen max-w-6xl flex-col justify-end px-4 py-10 sm:px-6 lg:px-12">
+      <div className="mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-end px-4 py-10 sm:px-6 lg:px-12">
 
         {/* Nav + Info */}
         <div className="mb-12 flex w-full flex-wrap items-start justify-between gap-10 md:gap-16">

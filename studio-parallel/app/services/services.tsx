@@ -8,7 +8,7 @@ export default function Services() {
   return (
     <section className="px-6 lg:px-16 py-24 bg-white text-black space-y-24 flex flex-col gap-32 my-16">
       {/* 01 — INTEGRATE */}
-      <div className="h-screen flex items-center" id="integrate">
+      <div className="h-[70vh] md:h-screen flex items-center" id="integrate">
         <Service
           number="01"
           heading="INTEGRATE"
@@ -29,7 +29,7 @@ export default function Services() {
       </div>
 
       {/* 02 — BUILD */}
-      <div className="h-screen flex items-center" id="build">
+      <div className="h-[70vh] md:h-screen flex items-center" id="build">
         <Service
           number="02"
           heading="BUILD"
@@ -50,7 +50,7 @@ export default function Services() {
       </div>
 
       {/* 03 — CORE */}
-      <div className="h-screen flex items-center" id="core">
+      <div className="h-[70vh] md:h-screen flex items-center" id="core">
         <Service
           number="03"
           heading="CORE"
@@ -89,7 +89,7 @@ function Service({
   included: string[];
 }) {
   return (
-    <div className="relative max-w-6xl mx-auto border-t border-black/10 pt-16 lg:pt-24">
+    <div className="relative max-w-6xl mx-auto border-t border-black/10 pt-8 lg:pt-24">
       {/* Ghost number */}
       <span className="pointer-events-none select-none absolute -top-8 lg:-top-16 -left-2 lg:-left-6 text-6xl lg:text-[8rem] font-light text-black/5 leading-none">
         {number}
@@ -147,7 +147,7 @@ function Service({
 
 export function ServicesIntro() {
   return (
-    <section className="px-6 lg:px-16 py-20 bg-white text-black" id="services">
+    <section className="px-6 lg:px-16 py-10 bg-white text-black" id="services">
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Label + Heading */}
         <div className="space-y-4">
@@ -208,7 +208,7 @@ export function ServicesIntro() {
           <div className="space-y-3 text-sm lg:text-base text-black/70">
             <p className="font-medium">How it works in practice:</p>
 
-            <ul className="space-y-2 list-disc list-inside">
+            <ul className="space-y-2 list-disc list-outside">
               <li>
                 <span className="font-medium">Discovery call</span> — we talk through
                 your business, systems and bottlenecks.

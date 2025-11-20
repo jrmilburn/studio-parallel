@@ -4,7 +4,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 type MenuContextType = {
   menuOpen: boolean;
-  setMenuOpen: (open: boolean) => void;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const MenuContext = createContext<MenuContextType | null>(null);

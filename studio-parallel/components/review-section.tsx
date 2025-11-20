@@ -8,7 +8,7 @@ export default function ReviewSection() {
 
 
     return (
-        <section className="h-[200vh] relative lg:mx-12" data-nav-theme="light">
+        <section className="h-[150vh] relative lg:mx-12" data-nav-theme="light">
             <AnimationBlock 
                 pos="7"
                 className="top-5! left-1!"
@@ -55,7 +55,7 @@ export default function ReviewSection() {
 
 
             <div className="max-w-5xl mx-auto flex justify-end w-full">
-                <h2 className="text-6xl mt-24 text-right">The Parallel <br/>difference.</h2>
+                <h2 className="text-6xl mt-52 md:mt-24 text-right pr-4 lg:pr-0">The Parallel <br/>difference.</h2>
             </div>
             <ReviewCard 
                 image="/"

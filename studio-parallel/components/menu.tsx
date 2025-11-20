@@ -22,7 +22,7 @@ export default function Menu({ open, setOpen } : { open : boolean, setOpen : Rea
                     </div>
                 </div>
             </div>
-            <button className="font-semibold text-white self-start" onClick={() => setOpen(false)}><AnimateIn shown={open} delay={open === false ? "delay-300" : "delay-600"}><HoverAnimate>Close</HoverAnimate></AnimateIn></button>
+            <button className="font-semibold text-white self-center md:self-start" onClick={() => setOpen(false)}><AnimateIn shown={open} delay={open === false ? "delay-300" : "delay-600"}><HoverAnimate>Close</HoverAnimate></AnimateIn></button>
             </div>
         </div>
     )
