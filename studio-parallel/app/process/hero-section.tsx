@@ -1,26 +1,12 @@
 "use client"
 
-import { useEffect, useState } from "react";
 import HeroAnimation from "../../components/hero-animation"
 import HeroButton from "../../components/hero-button"
-import HoverAnimate from "../../components/hover-animate"
 import RevealOnScroll from "../../components/reveal-on-scroll"
 
 import Link from "next/link"
 
 export default function HeroSection() {
-
-  const [hideScrollLink, setHideScrollLink] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 10) setHideScrollLink(true);
-      else setHideScrollLink(false);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
     return(
         <section 

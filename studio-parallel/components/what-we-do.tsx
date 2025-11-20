@@ -1,25 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
 
 import Button from "./button"
 import RevealOnScroll from "./reveal-on-scroll"
 import Link from "next/link"
-import HoverAnimate from "./hover-animate"
 
 export default function WhatWeDo() {
-
-  const [hideScrollLink, setHideScrollLink] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 10000) setHideScrollLink(true);
-      else setHideScrollLink(false);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
     return (
         <div className="relative h-screen flex flex-col items-start px-4 lg:px-16 py-16 gap-8" data-nav-theme="light" id="what-we-do">

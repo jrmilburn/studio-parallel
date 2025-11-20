@@ -78,6 +78,7 @@ export default function PricingSection({ data, onPlanSelect }: PricingSectionPro
             `}
             style={
               plan.mostPopular
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 ? ({ ["--accent" as any]: ACCENT } as React.CSSProperties)
                 : undefined
             }
