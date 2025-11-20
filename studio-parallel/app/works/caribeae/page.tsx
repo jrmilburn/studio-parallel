@@ -132,7 +132,7 @@ export default function CaribeaePlatformDiagram() {
             className="
               inline-flex
               w-fit
-              self-start
+              self-center
               justify-start items-center
               rounded-full border border-black/10
               bg-white p-1
@@ -142,10 +142,10 @@ export default function CaribeaePlatformDiagram() {
             <button
               type="button"
               onClick={() => setMode("before")}
-              className={`px-4 py-1.5 rounded-full transition-colors ${
+              className={`px-4 py-1.5 rounded-full transition-all cursor-pointer ${
                 isBefore
                   ? "bg-black text-white"
-                  : "text-black/60 hover:text-black"
+                  : "text-black/60 hover:text-black hover:bg-gray-50"
               }`}
             >
               Old workflow
@@ -153,10 +153,10 @@ export default function CaribeaePlatformDiagram() {
             <button
               type="button"
               onClick={() => setMode("after")}
-              className={`px-4 py-1.5 rounded-full transition-colors ${
+              className={`px-4 py-1.5 rounded-full transition-all cursor-pointer ${
                 !isBefore
                   ? "bg-black text-white"
-                  : "text-black/60 hover:text-black"
+                  : "text-black/60 hover:text-black hover:bg-gray-50"
               }`}
             >
               New system

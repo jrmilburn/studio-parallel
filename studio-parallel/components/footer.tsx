@@ -70,13 +70,13 @@ export default function Footer() {
           <div className="flex flex-wrap gap-4">
             <Link
               className="text-xs sm:text-sm md:text-base"
-              href="/"
+              href="/privacy-policy"
             >
-              <HoverAnimate>LinkedIn</HoverAnimate>
+              <HoverAnimate>Privacy Policy</HoverAnimate>
             </Link>
             <Link
               className="text-xs sm:text-sm md:text-base"
-              href="/"
+              href="/legal"
             >
               <HoverAnimate>Legal Terms</HoverAnimate>
             </Link>

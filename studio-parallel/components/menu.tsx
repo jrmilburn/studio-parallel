@@ -16,9 +16,9 @@ export default function Menu({ open, setOpen } : { open : boolean, setOpen : Rea
                     <Link className="text-[5vw]" href="/process" onClick={() => setOpen(false)}><AnimateIn shown={open} delay={open === false ? "delay-300" : "delay-800"}><HoverAnimate>PROCESS</HoverAnimate></AnimateIn></Link>
                 </ul>
                 <div className="flex flex-col">
-                    <Link href="/"><AnimateIn shown={open} delay={open === false ? "delay-200" : "delay-900"}><HoverAnimate>INSTAGRAM</HoverAnimate></AnimateIn></Link>
-                    <div className="flex flex-col">
-                        <Link href="/"><AnimateIn shown={open} delay={open === false ? "delay-100" : "delay-1000"}><HoverAnimate>LEGAL TERMS</HoverAnimate></AnimateIn></Link>
+                    <Link href="/privacy-policy" onClick={() => setOpen(false)}><AnimateIn shown={open} delay={open === false ? "delay-200" : "delay-900"}><HoverAnimate>PRIVACY POLICY</HoverAnimate></AnimateIn></Link>
+                    <div className="flex flex-col" onClick={() => setOpen(false)}>
+                        <Link href="/legal"><AnimateIn shown={open} delay={open === false ? "delay-100" : "delay-1000"}><HoverAnimate>LEGAL TERMS</HoverAnimate></AnimateIn></Link>
                     </div>
                 </div>
             </div>
