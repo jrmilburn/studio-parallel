@@ -1,10 +1,14 @@
 "use client";
 
+import { useState, useTransition } from "react";
 import { createPortal } from "react-dom";
 
-import MultiStepGetInTouchForm from "./form-flow";
+import MultiStepGetInTouchForm, {
+  type GetInTouchFormData,
+} from "./form-flow";
 import AnimateIn from "./animate-in";
 import HoverAnimate from "./hover-animate";
+import { submitGetInTouch } from "@/lib/server/submitEnquiry";
 
 export default function GetInTouchForm({
   visible,
@@ -14,9 +18,31 @@ export default function GetInTouchForm({
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   // On the server, `document` doesn't exist, so just render nothing.
+
+
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [isPending, startTransition] = useTransition();
+
   if (typeof document === "undefined") {
     return null;
   }
+
+  const handleComplete = (data: GetInTouchFormData) => {
+    setStatus("idle");
+
+    startTransition(async () => {
+      const res = await submitGetInTouch(data);
+
+      if (res.ok) {
+        setStatus("success");
+        // optional: close after a short delay
+        // setTimeout(() => setVisible(false), 1600);
+      } else {
+        setStatus("error");
+        console.error(res.errors);
+      }
+    });
+  };
 
   return createPortal(
     <div
@@ -78,8 +104,24 @@ export default function GetInTouchForm({
           </div>
         </div>
 
-        <div>
-          <MultiStepGetInTouchForm />
+        <div className="mt-8 flex-1 flex flex-col">
+          <MultiStepGetInTouchForm onComplete={handleComplete} />
+
+          {/* Status / feedback */}
+          <div className="mt-3 text-xs text-slate-300 min-h-[1.5rem]">
+            {isPending && <span>Sending your enquiry…</span>}
+            {status === "success" && (
+              <span className="text-emerald-400">
+                Thanks — I&apos;ll review this and get back to you within 2
+                business days.
+              </span>
+            )}
+            {status === "error" && (
+              <span className="text-red-400">
+                Something went wrong sending your enquiry. Please try again.
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>,
