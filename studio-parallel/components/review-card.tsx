@@ -26,8 +26,8 @@ export default function ReviewCard({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <ReviewAvatar image={image} name={name} subheading={position} />
         {casestudy && (
-          <Link href={casestudy} className="sm:self-end">
-            <HoverAnimate>View case study</HoverAnimate>
+          <Link href={casestudy} className="sm:self-end group">
+            <HoverAnimate>View case study<span aria-hidden className="group-hover:translate-x-[2px] transition-all">→</span></HoverAnimate>
           </Link>
         )}
       </div>
